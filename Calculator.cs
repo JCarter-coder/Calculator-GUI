@@ -274,5 +274,78 @@ namespace Calculator_GUI
                 }
             }
         }
+
+        private void toolStripTextBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripThemeMenu_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void toolStripThemeLight_Click(object sender, EventArgs e)
+        {
+            if (toolStripThemeLight.Checked == false)
+            {
+                // If light theme is unchecked, switch to light theme
+                toolStripThemeLight.Checked = true;
+                toolStripThemeDark.Checked = false;
+                // Apply Light theme
+                Calculator.ActiveForm.BackColor = Color.WhiteSmoke;
+                groupBox1.BackColor = Color.LightGray;
+                groupBox1.ForeColor = Color.Black;
+                calcDisplay.BackColor = Color.White;
+                calcDisplay.ForeColor = Color.Black;
+
+                foreach (Control control in groupBox1.Controls)
+                {
+                    if (control is Button button)
+                    {
+                        // Set the background and text color for each button
+                        button.BackColor = Color.WhiteSmoke;
+                        button.ForeColor = Color.Black;
+                    }
+                }
+                //this.BackColor = Color.White;
+                //calcDisplay.BackColor = Color.LightGray;
+                //calcDisplay.ForeColor = Color.Black;
+            }
+        }
+
+        private void toolStripThemeDark_Click(object sender, EventArgs e)
+        {
+            if (toolStripThemeDark.Checked == false)
+            {
+                // If dark theme is unchecked, switch to dark theme
+                toolStripThemeLight.Checked = false;
+                toolStripThemeDark.Checked = true;
+                // Apply Dark theme
+                Calculator.ActiveForm.BackColor = Color.DimGray;
+                groupBox1.BackColor = Color.Black;
+                groupBox1.ForeColor = Color.LightGray;
+                calcDisplay.BackColor = Color.DimGray;
+                calcDisplay.ForeColor = Color.White;
+
+                foreach (Control control in groupBox1.Controls)
+                {
+                    if (control is Button button)
+                    {
+                        // Set the background and text color for each button
+                        button.BackColor = Color.DarkGray;
+                        button.ForeColor = Color.White;
+                    }
+                }
+                //this.BackColor = Color.White;
+                //calcDisplay.BackColor = Color.LightGray;
+                //calcDisplay.ForeColor = Color.Black;
+            }
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }
