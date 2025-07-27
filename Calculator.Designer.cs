@@ -178,7 +178,7 @@
             this.button15.TabIndex = 15;
             this.button15.Text = "%";
             this.button15.UseVisualStyleBackColor = false;
-            this.button15.Click += new System.EventHandler(this.button15_Click);
+            this.button15.Click += new System.EventHandler(this.buttonPercent_Click);
             // 
             // Pi
             // 
@@ -217,7 +217,7 @@
             this.buttonDelete.TabIndex = 12;
             this.buttonDelete.Text = "◄ DEL";
             this.buttonDelete.UseVisualStyleBackColor = false;
-            this.buttonDelete.Click += new System.EventHandler(this.button12_Click);
+            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
             // 
             // button11
             // 
@@ -230,7 +230,7 @@
             this.button11.TabIndex = 11;
             this.button11.Text = ".";
             this.button11.UseVisualStyleBackColor = false;
-            this.button11.Click += new System.EventHandler(this.button11_Click);
+            this.button11.Click += new System.EventHandler(this.buttonDecimal_Click);
             // 
             // button0
             // 

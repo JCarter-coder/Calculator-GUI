@@ -17,7 +17,9 @@ namespace Calculator_GUI
             InitializeComponent();
         }
 
+        // Retain a running total that's parsed from the display text
         private double firstNumber = 0;
+        // Store the current operation to perform when equals is pressed
         string operation = "";
 
         private void calcDisplay_TextChanged(object sender, EventArgs e)
@@ -101,10 +103,12 @@ namespace Calculator_GUI
         {
             // This clears the display
             calcDisplay.Text = "";
-            firstNumber = 0; // Reset the answer
+            // Reset the running total and stored operation
+            firstNumber = 0;
+            operation = "";
         }
 
-        private void button12_Click(object sender, EventArgs e)
+        private void buttonDelete_Click(object sender, EventArgs e)
         {
             // This is the Delete back button
             // If the display text isn't empty, remove the last character
@@ -125,12 +129,13 @@ namespace Calculator_GUI
             }
         }
 
-        private void button11_Click(object sender, EventArgs e)
+        private void buttonDecimal_Click(object sender, EventArgs e)
         {
             // Decimal point button
             // Ensure that there is only one decimal point in the display
             if (!calcDisplay.Text.Contains("."))
             {
+                // If the display evaluates to null/empty, start with "0", otherwise append "."
                 calcDisplay.Text = string.IsNullOrEmpty(calcDisplay.Text) ? "0." : calcDisplay.Text + ".";
             }
         }
@@ -140,6 +145,11 @@ namespace Calculator_GUI
             // This is the addition button
             if (calcDisplay.Text.Length > 0)
             {
+                // If there is already an operation set, perform the calculation first before proceeding to the next operation
+                if (operation.Length > 0)
+                {
+                    buttonEquals_Click(sender, e);
+                }
                 // Try to parse the first number from the display text
                 if (double.TryParse(calcDisplay.Text, out firstNumber))
                 {
@@ -147,11 +157,6 @@ namespace Calculator_GUI
                     operation = "+";
                     // Clear the display for the next input
                     calcDisplay.Text = "";
-                }
-                else
-                {
-                    // Handle the case where parsing fails (e.g., display invalid input)
-                    MessageBox.Show("Invalid input. Please enter a valid number.");
                 }
             }
         }
@@ -161,6 +166,11 @@ namespace Calculator_GUI
             // This is the subtraction button
             if (calcDisplay.Text.Length > 0)
             {
+                // If there is already an operation set, perform the calculation first before proceeding to the next operation
+                if (operation.Length > 0)
+                {
+                    buttonEquals_Click(sender, e);
+                }
                 // Try to parse the first number from the display text
                 if (double.TryParse(calcDisplay.Text, out firstNumber))
                 {
@@ -168,11 +178,6 @@ namespace Calculator_GUI
                     operation = "-";
                     // Clear the display for the next input
                     calcDisplay.Text = ""; 
-                }
-                else
-                {
-                    // Handle the case where parsing fails (e.g., display invalid input)
-                    MessageBox.Show("Invalid input. Please enter a valid number.");
                 }
             }
         }
@@ -182,6 +187,11 @@ namespace Calculator_GUI
             // This is the multiplication button
             if (calcDisplay.Text.Length > 0)
             {
+                // If there is already an operation set, perform the calculation first before proceeding to the next operation
+                if (operation.Length > 0)
+                {
+                    buttonEquals_Click(sender, e);
+                }
                 // Try to parse the first number from the display text
                 if (double.TryParse(calcDisplay.Text, out firstNumber))
                 {
@@ -189,11 +199,6 @@ namespace Calculator_GUI
                     operation = "*";
                     // Clear the display for the next input
                     calcDisplay.Text = "";
-                }
-                else
-                {
-                    // Handle the case where parsing fails (e.g., display invalid input)
-                    MessageBox.Show("Invalid input. Please enter a valid number.");
                 }
             }
         }
@@ -203,6 +208,11 @@ namespace Calculator_GUI
             // This is the division button
             if (calcDisplay.Text.Length > 0)
             {
+                // If there is already an operation set, perform the calculation first before proceeding to the next operation
+                if (operation.Length > 0)
+                {
+                    buttonEquals_Click(sender, e);
+                }
                 // Try to parse the first number from the display text
                 if (double.TryParse(calcDisplay.Text, out firstNumber))
                 {
@@ -210,11 +220,6 @@ namespace Calculator_GUI
                     operation = "/";
                     // Clear the display for the next input
                     calcDisplay.Text = "";
-                }
-                else
-                {
-                    // Handle the case where parsing fails (e.g., display invalid input)
-                    MessageBox.Show("Invalid input. Please enter a valid number.");
                 }
             }
         }
@@ -233,27 +238,26 @@ namespace Calculator_GUI
                 }
                 else if (operation == "-")
                 {
-                    result = firstNumber - secondNumber; // Perform addition
+                    result = firstNumber - secondNumber; // Perform subtraction
                 }
                 else if (operation == "*")
                 {
-                    result = firstNumber * secondNumber; // Perform addition
+                    result = firstNumber * secondNumber; // Perform mulitplication
                 }
                 else if (operation == "/")
                 {
-                    // TODO: Check for division by zero
-                    result = firstNumber / secondNumber; // Perform addition
+                    result = firstNumber / secondNumber; // Perform division
                 }
                 // Update firstNumber for potential further calculations
                 firstNumber = result;
                 // Display the result
                 calcDisplay.Text = result.ToString();
-                // Reset the operation after calculation
+                // Reset the operation after calculation to handle additional operations
                 operation = ""; 
             }
         }
 
-        private void button15_Click(object sender, EventArgs e)
+        private void buttonPercent_Click(object sender, EventArgs e)
         {
             // This is the percentage button
             if (calcDisplay.Text.Length > 0)
@@ -266,11 +270,6 @@ namespace Calculator_GUI
                     firstNumber /= 100;
                     // Display the percentage value
                     calcDisplay.Text = firstNumber.ToString();
-                }
-                else
-                {
-                    // Handle the case where parsing fails (e.g., display invalid input)
-                    MessageBox.Show("Invalid input. Please enter a valid number.");
                 }
             }
         }
@@ -293,12 +292,16 @@ namespace Calculator_GUI
                 toolStripThemeLight.Checked = true;
                 toolStripThemeDark.Checked = false;
                 // Apply Light theme
+                // ...to the outer form area
                 Calculator.ActiveForm.BackColor = Color.WhiteSmoke;
+                // ...to the group box area
                 groupBox1.BackColor = Color.LightGray;
                 groupBox1.ForeColor = Color.Black;
+                // ...to the calculator display area
                 calcDisplay.BackColor = Color.White;
                 calcDisplay.ForeColor = Color.Black;
 
+                // ...to each button within the group box
                 foreach (Control control in groupBox1.Controls)
                 {
                     if (control is Button button)
@@ -308,9 +311,6 @@ namespace Calculator_GUI
                         button.ForeColor = Color.Black;
                     }
                 }
-                //this.BackColor = Color.White;
-                //calcDisplay.BackColor = Color.LightGray;
-                //calcDisplay.ForeColor = Color.Black;
             }
         }
 
@@ -322,12 +322,16 @@ namespace Calculator_GUI
                 toolStripThemeLight.Checked = false;
                 toolStripThemeDark.Checked = true;
                 // Apply Dark theme
+                // ...to the outer form area
                 Calculator.ActiveForm.BackColor = Color.DimGray;
+                // ...to the group box area
                 groupBox1.BackColor = Color.Black;
                 groupBox1.ForeColor = Color.LightGray;
+                // ...to the calculator display area
                 calcDisplay.BackColor = Color.DimGray;
                 calcDisplay.ForeColor = Color.White;
 
+                // ...to each button within the group box
                 foreach (Control control in groupBox1.Controls)
                 {
                     if (control is Button button)
@@ -337,9 +341,6 @@ namespace Calculator_GUI
                         button.ForeColor = Color.White;
                     }
                 }
-                //this.BackColor = Color.White;
-                //calcDisplay.BackColor = Color.LightGray;
-                //calcDisplay.ForeColor = Color.Black;
             }
         }
 
