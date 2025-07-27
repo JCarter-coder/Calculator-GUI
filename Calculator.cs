@@ -17,7 +17,7 @@ namespace Calculator_GUI
             InitializeComponent();
         }
 
-        private float firstNumber = 0;
+        private double firstNumber = 0;
         string operation = "";
 
         private void calcDisplay_TextChanged(object sender, EventArgs e)
@@ -141,7 +141,7 @@ namespace Calculator_GUI
             if (calcDisplay.Text.Length > 0)
             {
                 // Try to parse the first number from the display text
-                if (float.TryParse(calcDisplay.Text, out firstNumber))
+                if (double.TryParse(calcDisplay.Text, out firstNumber))
                 {
                     // Successfully parsed the number
                     operation = "+";
@@ -162,7 +162,7 @@ namespace Calculator_GUI
             if (calcDisplay.Text.Length > 0)
             {
                 // Try to parse the first number from the display text
-                if (float.TryParse(calcDisplay.Text, out firstNumber))
+                if (double.TryParse(calcDisplay.Text, out firstNumber))
                 {
                     // Successfully parsed the number
                     operation = "-";
@@ -183,7 +183,7 @@ namespace Calculator_GUI
             if (calcDisplay.Text.Length > 0)
             {
                 // Try to parse the first number from the display text
-                if (float.TryParse(calcDisplay.Text, out firstNumber))
+                if (double.TryParse(calcDisplay.Text, out firstNumber))
                 {
                     // Successfully parsed the number
                     operation = "*";
@@ -204,7 +204,7 @@ namespace Calculator_GUI
             if (calcDisplay.Text.Length > 0)
             {
                 // Try to parse the first number from the display text
-                if (float.TryParse(calcDisplay.Text, out firstNumber))
+                if (double.TryParse(calcDisplay.Text, out firstNumber))
                 {
                     // Successfully parsed the number
                     operation = "/";
@@ -222,10 +222,10 @@ namespace Calculator_GUI
         private void buttonEquals_Click(object sender, EventArgs e)
         {
             // This is the equals button
-            float secondNumber;
-            if (float.TryParse(calcDisplay.Text, out secondNumber))
+            double secondNumber;
+            if (double.TryParse(calcDisplay.Text, out secondNumber))
             {
-                float result = 0;
+                double result = 0;
 
                 if (operation == "+")
                 {
@@ -259,7 +259,7 @@ namespace Calculator_GUI
             if (calcDisplay.Text.Length > 0)
             {
                 // Try to parse the first number from the display text
-                if (float.TryParse(calcDisplay.Text, out firstNumber))
+                if (double.TryParse(calcDisplay.Text, out firstNumber))
                 {
                     // Successfully parsed the number
                     // Convert to percentage
